@@ -20,31 +20,34 @@ import { UseRealm } from "./useRealm";
 import { useState, useEffect } from "react";
 
 export interface UseObject {
-  <T>(type: string, primaryKey: /*Realm.PrimaryKey*/ number): { hasError: boolean; data: (T & Realm.Object) | null };
+  <T>(type: string, primaryKey: /*Realm.PrimaryKey*/ number): { error: Error | null; data: (T & Realm.Object) | null };
 }
 
 export function createUseObject(useRealm: UseRealm): UseObject {
   function useObject<T>(type: string, primaryKey: /*Realm.PrimaryKey*/ number) {
     const realm = useRealm();
-    const [hasError, setHasError] = useState(false);
-    const [object, setObject] = useState<(T & Realm.Object) | null>(null);
+    const [error, setError] = useState<Error | null>(null);
+    const [object, setObject] = useState<(T & Realm.Object) | null>(
+      realm.objectForPrimaryKey(type, primaryKey) ?? null,
+    );
 
     try {
       useEffect(() => {
-        setObject(realm.objectForPrimaryKey(type, primaryKey) ?? null);
-      }, [type, primaryKey]);
-
-      object?.addListener((_, changes) => {
-        if (changes.changedProperties.length > 0 || changes.deleted) {
-          setObject(realm.objectForPrimaryKey(type, primaryKey) ?? null);
-        }
-      });
+        object?.addListener((_, changes) => {
+          if (changes.changedProperties.length > 0) {
+            setObject(realm.objectForPrimaryKey(type, primaryKey) ?? null);
+          } else if (changes.deleted) {
+            setObject(null);
+          }
+        });
+        return () => object?.removeAllListeners();
+      }, [object, type, primaryKey]);
     } catch (err) {
       console.error(err);
-      setHasError(true);
+      setError(err as Error);
     }
 
-    return { hasError, data: object };
+    return { error, data: object };
   }
   return useObject;
 }
