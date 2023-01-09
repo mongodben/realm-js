@@ -10,11 +10,12 @@
     "start": "tsc --watch",
     "test": "jest --forceExit",
     "lint": "eslint --ext .tsx .",
-    "prepare": "rm -rf dist && npm run build"
+    "prepare": "rm -rf dist && npm run build",
+    "doc": "typedoc"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "@realm/common": "^0.1.4"
+    "@realm/common": "^0.1.4",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -39,7 +40,8 @@
     "react": "18.1.0",
     "react-native": "^0.70.1",
     "react-test-renderer": "18.1.0",
-    "realm": "^11.0.0"
+    "realm": "^11.0.0",
+    "typedoc": "^0.23.24"
   },
   "peerDependencies": {
     "react": ">=17.0.2",
