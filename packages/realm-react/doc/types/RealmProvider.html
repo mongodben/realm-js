@@ -15,22 +15,37 @@
 <li><a href="../modules.html">@realm/react</a></li>
 <li><a href="RealmProvider.html">RealmProvider</a></li></ul>
 <h1>Type alias RealmProvider</h1></div>
-<div class="tsd-signature">Realm<wbr/>Provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">createRealmProvider</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-signature">Realm<wbr/>Provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RealmProviderProps</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">ReactElement</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span></div>
+<div class="tsd-type-declaration">
+<h4>Type declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+<li class="tsd-signature" id="__type.__type-1"><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RealmProviderProps</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReactElement</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+<li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Returns a Context Provider component that is required to wrap any component using
 the Realm hooks.</p>
 
 <h3>Example</h3><pre><code><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-6">AppRoot</span><span class="hl-1"> = () </span><span class="hl-4">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-7">syncConfig</span><span class="hl-1"> = {</span><br/><span class="hl-1">    </span><span class="hl-0">flexible:</span><span class="hl-1"> </span><span class="hl-4">true</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">user:</span><span class="hl-1"> </span><span class="hl-0">currentUser</span><br/><span class="hl-1">  };</span><br/><br/><span class="hl-1">  </span><span class="hl-2">return</span><span class="hl-1"> (</span><br/><span class="hl-1">    &lt;</span><span class="hl-0">RealmProvider</span><span class="hl-1"> </span><span class="hl-0">path</span><span class="hl-1">={</span><span class="hl-3">&quot;data.realm&quot;</span><span class="hl-1">} </span><span class="hl-0">sync</span><span class="hl-1">={</span><span class="hl-0">syncConfig</span><span class="hl-1">}&gt;</span><br/><span class="hl-1">      &lt;</span><span class="hl-0">App</span><span class="hl-1">/&gt;</span><br/><span class="hl-1">    &lt;/</span><span class="hl-0">RealmProvider</span><span class="hl-1">&gt;</span><br/><span class="hl-1">  )</span><br/><span class="hl-1">}</span>
 </code></pre>
 
-<h3>Param</h3><p>The <a href="Realm.Configuration.html">Configuration</a> for this Realm defaults to
+<h3>Category</h3><p>Providers</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>props: <span class="tsd-signature-type">RealmProviderProps</span></h5>
+<div class="tsd-comment tsd-typography"><p>The <a href="Realm.Configuration.html">Configuration</a> for this Realm defaults to
 the config passed to <code>createRealmProvider</code>, but individual config keys can
 be overridden when creating a <code>&lt;RealmProvider&gt;</code> by passing them as props.
 For example, to override the <code>path</code> config value, use a prop named <code>path</code>
 e.g., <code>path=&quot;newPath.realm&quot;</code>
 an attribute of the same key.</p>
-</div><aside class="tsd-sources">
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReactElement</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/mongodben/realm-js/blob/e3af56b84/packages/realm-react/src/index.tsx#L52">src/index.tsx:52</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/mongodben/realm-js/blob/dd962dc64/packages/realm-react/src/RealmProvider.tsx#L69">src/RealmProvider.tsx:69</a></li></ul></aside></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

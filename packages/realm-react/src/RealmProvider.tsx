@@ -16,7 +16,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { ReactElement, useEffect, useState, useRef } from "react";
 import Realm from "realm";
 import { isEqual } from "lodash";
 import { useUser } from "./UserProvider";
@@ -25,11 +25,48 @@ type PartialRealmConfiguration = Omit<Partial<Realm.Configuration>, "sync"> & {
   sync?: Partial<Realm.SyncConfiguration>;
 };
 
-type ProviderProps = PartialRealmConfiguration & {
+type RealmProviderProps = PartialRealmConfiguration & {
+  /**
+   * A component to fall back to while the realm is loading.
+   */
   fallback?: React.ComponentType<unknown> | React.ReactElement | null | undefined;
+  /**
+   * TODO: explain this??
+   */
   realmRef?: React.MutableRefObject<Realm | null>;
   children: React.ReactNode;
 };
+
+/**
+ * Returns a Context Provider component that is required to wrap any component using
+ * the Realm hooks.
+ *
+ * @example
+ * ```
+ * const AppRoot = () => {
+ *   const syncConfig = {
+ *     flexible: true,
+ *     user: currentUser
+ *   };
+ *
+ *   return (
+ *     <RealmProvider path={"data.realm"} sync={syncConfig}>
+ *       <App/>
+ *     </RealmProvider>
+ *   )
+ * }
+ * ```
+ *
+ * @param props - The {@link Realm.Configuration} for this Realm defaults to
+ * the config passed to `createRealmProvider`, but individual config keys can
+ * be overridden when creating a `<RealmProvider>` by passing them as props.
+ * For example, to override the `path` config value, use a prop named `path`
+ * e.g., `path="newPath.realm"`
+ * an attribute of the same key.
+ *
+ * @Category Providers
+ */
+export type RealmProvider = (props: RealmProviderProps) => ReactElement<any, any> | null;
 
 /**
  * Generates a `RealmProvider` given a {@link Realm.Configuration} and {@link React.Context}.
@@ -41,7 +78,7 @@ type ProviderProps = PartialRealmConfiguration & {
 export function createRealmProvider(
   realmConfig: Realm.Configuration,
   RealmContext: React.Context<Realm | null>,
-): React.FC<ProviderProps> {
+): React.FC<RealmProviderProps> {
   /**
    * Returns a Context Provider component that is required to wrap any component using
    * the Realm hooks.
